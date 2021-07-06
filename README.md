@@ -1,5 +1,5 @@
-# SomeProjectName
+# DFC-Notify-pkg
 
-## Introduction
+## Description
 
-An introduction to the project goes here!
+A Repo to encapsulate multiple versions of GOV Notify package dependencies used by NCS projects
