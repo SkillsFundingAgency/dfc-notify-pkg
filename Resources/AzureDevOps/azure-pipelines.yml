@@ -39,6 +39,22 @@ stages:
         TestSuffix: UnitTests
 
     - task: NuGetCommand@2
+      displayName: "Pack and version Notify161 nuget file"
+      inputs:      
+        command: pack
+        packagesToPack: 'Notify161/DFC.Notify161.csproj.nuspec' # Required when command == Pack
+        packDestination: '$(System.DefaultWorkingDirectory)/Notify1.6.1' # Optional
+        versioningScheme: byEnvVar
+        versionEnvVar: GitVersion.MajorMinorPatch
+        basePath: 'Notify161'
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Notify161
+      inputs:
+        targetPath: "$(System.DefaultWorkingDirectory)/Notify1.6.1"
+        artifactName: ${{ variables.SolutionBaseName }}.Notify161
+
+    - task: NuGetCommand@2
       displayName: "Pack and version Notify280 nuget file"
       inputs:      
         command: pack
