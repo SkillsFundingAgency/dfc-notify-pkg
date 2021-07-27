@@ -55,6 +55,22 @@ stages:
         artifactName: ${{ variables.SolutionBaseName }}.Notify161
 
     - task: NuGetCommand@2
+      displayName: "Pack and version Notify240 nuget file"
+      inputs:      
+        command: pack
+        packagesToPack: 'Notify240/DFC.Notify240.csproj.nuspec' # Required when command == Pack
+        packDestination: '$(System.DefaultWorkingDirectory)/Notify2.4.0' # Optional
+        versioningScheme: byEnvVar
+        versionEnvVar: GitVersion.MajorMinorPatch
+        basePath: 'Notify240'
+
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Notify240
+      inputs:
+        targetPath: "$(System.DefaultWorkingDirectory)/Notify2.4.0"
+        artifactName: ${{ variables.SolutionBaseName }}.Notify240
+
+    - task: NuGetCommand@2
       displayName: "Pack and version Notify280 nuget file"
       inputs:      
         command: pack
